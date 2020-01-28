@@ -1,0 +1,91 @@
+
+payable contract LocalEventContract =
+
+    record local_event = {
+        index : int,
+        owner : address,
+        name : string,
+        location : string,
+        cover    : string,
+        price  :int,
+        description : string,
+        paid   :int,
+        up_vote   : int,
+        down_vote :int,
+        total_paid : int
+        }
+
+    record state = {
+        local_events : map(int, local_event), 
+        event_length : int
+        }
+
+
+    stateful entrypoint init() = { 
+        event_length = 0,
+        local_events = {}
+        }
+    
+    
+    public stateful entrypoint add_event(name': string, location': string,cover' : string,price' : int,description' :string) =
+        let t_index = get_event_length() +1
+
+        let local_event = {
+            index = t_index,
+            owner = Call.caller,
+            name = name',
+            location = location',
+            cover    = cover',
+            price  = price' ,
+            description = description',
+            paid   = 0,
+            up_vote   = 0,
+            down_vote = 0,
+            total_paid = 0
+            }
+        put(state{local_events[t_index] = local_event,event_length = t_index })
+    
+    public stateful entrypoint change_event_location(index : int,new_location: string) =
+        let local_event = get_local_event(index)
+        require(local_event.owner == Call.caller, "You cannot change event  your don't own ")
+        let update_event    =  state.local_events{[index].location = new_location }
+        put(state {local_events  =  update_event })
+
+    public entrypoint get_event_length() : int =
+       state.event_length
+
+    public entrypoint get_local_event(index : int) : local_event =
+        switch(Map.lookup(index, state.local_events))
+                   None => abort("There was no Local event found with this index registered")
+                   Some(value) => value
+        
+
+    payable stateful entrypoint pay_for_event(index: int,amount: int ) =
+        let local_event = get_local_event(index)
+        
+        if(local_event.paid != amount)
+           abort("Insuficient Amount")
+
+        else
+          Chain.spend(local_event.owner,Call.value)
+          let amount =local_event.paid + Call.value
+          let count =local_event.total_paid + 1
+          let update_local_event=state.local_events{[index].paid = amount }
+          let update_count =state.local_events{[index].total_paid = count }
+          put(state {local_events = update_local_event})
+          put(state {local_events = update_count}) 
+
+    public stateful entrypoint up_vote(index : int) =
+        let local_event = get_local_event(index)
+        require(local_event.owner == Call.caller, "You cannot vote for your own event")
+        let up =  local_event.up_vote+1
+        let update_event    =  state.local_events{[index].up_vote = up }
+        put(state {local_events  =  update_event })
+ 
+    public stateful entrypoint down_vote(index : int) =
+        let local_event = get_local_event(index)
+        require(local_event.owner == Call.caller, "You cannot vote for your own event")
+        let down =  local_event.down_vote+1
+        let update_event    =  state.local_events{[index].down_vote = down }
+        put(state {local_events  =  update_event })
+ 
