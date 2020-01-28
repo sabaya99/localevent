@@ -128,7 +128,7 @@ window.addEventListener('load',async () =>{
     $('#loader').show();
     client = await Ae.Aepp();
 
-    serviceLength = await callStatic('get_event_lrngth', []);
+    serviceLength = await callStatic('get_event_length', []);
 
     for (let i = 1; i <= eventsLength; i++) {
        const evt = await callStatic('get_local_event',[i]);
