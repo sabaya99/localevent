@@ -64,7 +64,7 @@ payable contract LocalEventContract =
     payable stateful entrypoint pay_for_event(index: int,amount: int ) =
         let local_event = get_local_event(index)
         
-        if(local_event.paid != amount)
+        if(local_event.price != amount)
            abort("Insuficient Amount")
 
         else
