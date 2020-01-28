@@ -133,7 +133,7 @@ window.addEventListener('load',async () =>{
     for (let i = 1; i <= eventsLength; i++) {
        const evt = await callStatic('get_local_event',[i]);
 
-        serviceArray.push({
+       eventsArray.push({
             id       : evt.index,
             owner    : evt.owner,
             name     : evt.name,
