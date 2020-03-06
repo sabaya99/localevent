@@ -91,7 +91,7 @@ payable contract LocalEventContract =
         put(state {local_events  =  update_event })
  
 `;
-var contractAddress= "ct_AEZcGUaf9717sMThxehATHQNNoGnR3Dpbn1xqP2QQApbTrgAv";
+var contractAddress= "ct_26hnREhq2HZbRFnhNGvh2tA2zp13Md5oC5LYbEJAtNW2kib5Mo";
 
 var client =null;
 
