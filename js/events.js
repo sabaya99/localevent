@@ -1,5 +1,6 @@
 var contractSource = `
 payable contract LocalEventContract =
+payable contract LocalEventContract =
 
     record local_event = {
         index : int,
@@ -57,7 +58,7 @@ payable contract LocalEventContract =
     
     public stateful entrypoint change_event_location(index : int,new_location: string) =
         let local_event = get_local_event(index)
-        require(local_event.owner == Call.caller, "You cannot change event  your don't own ")
+        //require(local_event.owner == Call.caller, "You cannot change event  your don't own ")
         let update_event    =  state.local_events{[index].location = new_location }
         put(state {local_events  =  update_event })
 
@@ -75,28 +76,21 @@ payable contract LocalEventContract =
         
 
     payable stateful entrypoint pay_for_event(index: int) =
-        let local_event = get_local_event(index)
-        
-        if(local_event.price < Call.value)
-            abort("Insuficient Amount")
-
-        elif(local_event.price > Call.value)
-           abort("Amount is greater than required")
-        else
-          Chain.spend(local_event.owner,Call.value)
-          let amount2 =local_event.paid + Call.value
-          let count =local_event.total_paid + 1
-          let update_local_event=state.local_events{[index].paid = amount2 }
-          let update_count =state.local_events{[index].total_paid = count }
-          let history = {
+         let local_event = get_local_event(index)
+         Chain.spend(local_event.owner,Call.value)
+         let amount =local_event.paid + Call.value
+         let count =local_event.total_paid + 1
+         let update_local_event=state.local_events{[index].paid = amount }
+         let update_count =state.local_events{[index].total_paid = count }
+         let history = {
                     index = get_event_length() + 1,
                     txt_ownwer = Call.caller,
                     amount = Call.value
              }
-          let update_history = state.local_events{[index].history = history::state.local_events[index].history}
-          put(state {local_events = update_local_event})
-          put(state {local_events = update_count}) 
-          put(state {local_events = update_history}) 
+         let update_history = state.local_events{[index].history = history::state.local_events[index].history}
+         put(state {local_events = update_local_event})
+         put(state {local_events = update_count}) 
+         put(state {local_events = update_history}) 
 
     payable  stateful entrypoint refund(event_id :int,txt_id :int) = 
            let local_event = get_local_event(event_id)
@@ -107,19 +101,19 @@ payable contract LocalEventContract =
           
     public stateful entrypoint up_vote(index : int) =
         let local_event = get_local_event(index)
-        require(local_event.owner == Call.caller, "You cannot vote for your own event")
+       // require(local_event.owner == Call.caller, "You cannot vote for your own event")
         let up =  local_event.up_vote+1
         let update_event    =  state.local_events{[index].up_vote = up }
         put(state {local_events  =  update_event })
  
     public stateful entrypoint down_vote(index : int) =
         let local_event = get_local_event(index)
-        require(local_event.owner == Call.caller, "You cannot vote for your own event")
+       // require(local_event.owner == Call.caller, "You cannot vote for your own event")
         let down =  local_event.down_vote+1
         let update_event    =  state.local_events{[index].down_vote = down }
         put(state {local_events  =  update_event })
 `;
-var contractAddress= "ct_2K8cR654Sv1xNmQtvgx1686sY6pMgKAj6D9gfMCj57M2FXn8Aw";
+var contractAddress= "ct_yQbP8rgZ3Cf6Zt5r8WUsXC8gdtaD2UNWyeyYNZCR7kHPeCjv";
 
 var client =null;
 
