@@ -194,7 +194,7 @@ $('#events').on('click','.payBtn', async function(e){
     $('#loader').show();
     const evt_id = e.target.id;
     const amount = $('input[id='+evt_id+']').val();
-    await contractCall('pay_for_event',[evt_id,amount], amount);
+    await contractCall('pay_for_event',[evt_id], amount);
     location.reload((true));
     renderLocalEvents();
     $('#loader').hide();
