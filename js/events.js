@@ -160,7 +160,7 @@ window.addEventListener('load',async () =>{
     console.log(eventsLength);
     for (let i = 1; i <= eventsLength; i++) {
        const evt = await callStatic('get_local_event',[i]);
-
+         console.log(evt);
        eventsArray.push({
             id       : evt.index,
             owner    : evt.owner,
@@ -172,10 +172,7 @@ window.addEventListener('load',async () =>{
             paid     : evt.paid,
             up_vote   : evt.up_vote,
             down_vote  : evt.down_vote,
-            total_paid     : evt.total_paid
-           
-
-          
+            total_paid     : evt.total_paid 
         })
 
         
