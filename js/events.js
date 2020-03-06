@@ -186,6 +186,8 @@ $(document).on('click','#saveBtn', async function(){
     const price = $('#price').val();
     const description = $('#description').val();
 
+    console.log(" name: "+name+" loc: "+location+" cover: "+cover+" price: "+price+" desc: "+description)
+
 
 
 await contractCall('add_event',[name, location,cover,price,description], 0);
