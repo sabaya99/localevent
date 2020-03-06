@@ -191,6 +191,7 @@ $(document).on('click','#saveBtn', async function(){
 
 
 await contractCall('add_event',[name, location,cover,price,description], 0);
+     location.reload((true));
      renderLocalEvents();
      $('#loader').hide();
 });
