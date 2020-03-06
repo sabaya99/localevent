@@ -1,5 +1,4 @@
 var contractSource = `
-
 payable contract LocalEventContract =
 
     record local_event = {
@@ -13,18 +12,27 @@ payable contract LocalEventContract =
         paid   :int,
         up_vote   : int,
         down_vote :int,
-        total_paid : int
+        total_paid : int,
+        history :list(users_transaction)
         }
-
+    record users_transaction = {
+        index : int,
+        txt_ownwer : address,
+        amount :int
+        }
     record state = {
         local_events : map(int, local_event), 
-        event_length : int
+        users_transactions : map(int ,users_transaction),
+        event_length : int,
+        history_length : int
         }
 
 
     stateful entrypoint init() = { 
         event_length = 0,
-        local_events = {}
+        history_length = 0,
+        local_events = {},
+        users_transactions = {}
         }
     
     
@@ -42,7 +50,8 @@ payable contract LocalEventContract =
             paid   = 0,
             up_vote   = 0,
             down_vote = 0,
-            total_paid = 0
+            total_paid = 0,
+            history = []
             }
         put(state{local_events[t_index] = local_event,event_length = t_index })
     
@@ -55,27 +64,47 @@ payable contract LocalEventContract =
     public entrypoint get_event_length() : int =
        state.event_length
 
+
+    public entrypoint get_history_length() : int =
+         state.history_length
+
     public entrypoint get_local_event(index : int) : local_event =
         switch(Map.lookup(index, state.local_events))
                    None => abort("There was no Local event found with this index registered")
                    Some(value) => value
         
 
-    payable stateful entrypoint pay_for_event(index: int,amount: int ) =
+    payable stateful entrypoint pay_for_event(index: int) =
         let local_event = get_local_event(index)
         
-        if(local_event.price != amount)
-           abort("Insuficient Amount")
+        if(local_event.price < Call.value)
+            abort("Insuficient Amount")
 
+        elif(local_event.price > Call.value)
+           abort("Amount is greater than required")
         else
           Chain.spend(local_event.owner,Call.value)
-          let amount =local_event.paid + Call.value
+          let amount2 =local_event.paid + Call.value
           let count =local_event.total_paid + 1
-          let update_local_event=state.local_events{[index].paid = amount }
+          let update_local_event=state.local_events{[index].paid = amount2 }
           let update_count =state.local_events{[index].total_paid = count }
+          let history = {
+                    index = get_event_length() + 1,
+                    txt_ownwer = Call.caller,
+                    amount = Call.value
+             }
+          let update_history = state.local_events{[index].history = history::state.local_events[index].history}
           put(state {local_events = update_local_event})
           put(state {local_events = update_count}) 
+          put(state {local_events = update_history}) 
 
+    payable  stateful entrypoint refund(event_id :int,txt_id :int) = 
+           let local_event = get_local_event(event_id)
+           let history = local_event.history
+           history
+
+
+          
     public stateful entrypoint up_vote(index : int) =
         let local_event = get_local_event(index)
         require(local_event.owner == Call.caller, "You cannot vote for your own event")
@@ -89,7 +118,6 @@ payable contract LocalEventContract =
         let down =  local_event.down_vote+1
         let update_event    =  state.local_events{[index].down_vote = down }
         put(state {local_events  =  update_event })
- 
 `;
 var contractAddress= "ct_AEZcGUaf9717sMThxehATHQNNoGnR3Dpbn1xqP2QQApbTrgAv";
 
