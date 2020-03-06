@@ -119,7 +119,7 @@ payable contract LocalEventContract =
         let update_event    =  state.local_events{[index].down_vote = down }
         put(state {local_events  =  update_event })
 `;
-var contractAddress= "ct_26hnREhq2HZbRFnhNGvh2tA2zp13Md5oC5LYbEJAtNW2kib5Mo";
+var contractAddress= "ct_2K8cR654Sv1xNmQtvgx1686sY6pMgKAj6D9gfMCj57M2FXn8Aw";
 
 var client =null;
 
