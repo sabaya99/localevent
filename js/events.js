@@ -17,6 +17,7 @@ payable contract LocalEventContract =
         }
     record users_transaction = {
         index : int,
+        event_address:address,
         txt_ownwer : address,
         amount :int
         }
@@ -80,15 +81,18 @@ payable contract LocalEventContract =
          let amount =local_event.paid + Call.value
          let count =local_event.total_paid + 1
          let update_local_event=state.local_events{[index].paid = amount }
+         put(state {local_events = update_local_event})
          let update_count =state.local_events{[index].total_paid = count }
+         put(state {local_events = update_count}) 
          let history = {
                     index = get_event_length() + 1,
+                     event_address =local_event.owner,
                     txt_ownwer = Call.caller,
                     amount = Call.value
              }
          let update_history = state.local_events{[index].history = history::state.local_events[index].history}
-         put(state {local_events = update_local_event})
-         put(state {local_events = update_count}) 
+         
+        
          put(state {local_events = update_history}) 
 
     payable  stateful entrypoint refund(event_id :int,txt_id :int) = 
@@ -112,7 +116,7 @@ payable contract LocalEventContract =
         let update_event    =  state.local_events{[index].down_vote = down }
         put(state {local_events  =  update_event })
 `;
-var contractAddress= "ct_yQbP8rgZ3Cf6Zt5r8WUsXC8gdtaD2UNWyeyYNZCR7kHPeCjv";
+var contractAddress= "ct_2qgiQHd7vcqkAp6brdYUC7b7kAA6kbtgVma8ikgCbU1tKGHJ7Y";
 
 var client =null;
 
