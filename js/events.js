@@ -1,6 +1,5 @@
 var contractSource = `
 payable contract LocalEventContract =
-payable contract LocalEventContract =
 
     record local_event = {
         index : int,
