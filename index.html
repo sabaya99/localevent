@@ -125,7 +125,20 @@
  
 </div>  
 </div>
+<!--HIDEN EDIT FORM-->
+<div id="editForm" style="visibility: hidden">
+<div class="row">
+<div class="col-sm-12">
+  <div class="input-group mb-3">
+                            <input type="text" class="form-control" value={{location}} placeholder="Name" id={{id}} name="amount">
+                            <div class="input-group-append">
+                                <button type="button" class="input-group-text changeLocationBtn" id={{id}}>Change Location</button>
 
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+</div>
 <!-- The Modal -->
 <div class="modal " id="modal-id">
   <div class="modal-dialog">
@@ -198,22 +211,7 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title">LOCATION: {{ location }}
-               <button type="button" class="btn btn-info btn-sm" data-toggle="popover" data placement="bottom" title="Popover title" data-content="
-                   <div class='row'>
-                   <div class='col-sm-12'>
-                            <div class='input-group mb-6'>
-                                <input type='text' class='form-control' value={{location}} placeholder='Name' id='change{{id}}' name='amount'>
-                                <div class='input-group-append'>
-                                <button type='button' class='input-group-text changeLocationBtn' id={{id}}>Change</button>
-
-                            </div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>"><i class='fa fa-pencil'></i>Change</button>
-                        </h5>
-                        
-                        
+                        <button class="btn btn-sm btn-primary stretched link" onClick="pop(this.id)" id="edit_form_btn{{id}}"><i  class="fa fa-pencil"></i>Change Location</button></h5>
                         <h6 class="card-title">PRICE: {{ price }} AE</h6>
                         <p class="card-text">{{description}}</p>
 
@@ -224,10 +222,6 @@
 
                             </div>
                         </div>
-
-
-
-
                       <!--STRAT OF USER PAYMENT CARD-->
                         <div class="row ">
                             <div class="col-sm-12 m-0 p-0">
@@ -306,14 +300,6 @@
      <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
     <script src="events.js"></script>
 <script>
-
- $(document).ready(function(){
-    $('[data-toggle="popover"]').popover({
-       html:true,
-        sanitize:false
-    });
-});
-
    function pop(id){
      console.log(id)
       $('#'+id).popover({
@@ -322,7 +308,7 @@
         title: 'Popover Form',
         html:true,
         sanitize: false,
-        content: html("h")
+        content: $('#editForm').html()
     })
    }
 
