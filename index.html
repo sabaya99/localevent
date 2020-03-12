@@ -221,7 +221,7 @@
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="button" id="changeLocationBtn" class="btn btn-info float-right">Change Location</button>
+        <button type="button"  class="btn btn-info float-right changeLocationBtn">Change Location</button>
       </div>
 
     </div>
@@ -243,7 +243,7 @@
                         <h5 class="card-title">LOCATION: {{ location }}
                         <button type="button" class="btn btn-sm btn-info mt-2"
                                     data-event_id={{id}} data-toggle="modal" 
-                                    data-event_name={{location}}
+                                    data-event_location={{location}}
                                     data-target="#modal-edit">
                                     <i  class="fa fa-pencil"></i>Change location</button>
                  
@@ -337,7 +337,7 @@
 <script>
 
 $('#modal-edit').on('show.bs.modal', function (event) {
-   let location = $(event.relatedTarget).data('location') 
+   let location = $(event.relatedTarget).data('event_location') 
   let evtId = $(event.relatedTarget).data('event_id') 
     $(this).find('.modal-body #location').val(location)
     $(this).find('.modal-body #event_id').val(evtId)
