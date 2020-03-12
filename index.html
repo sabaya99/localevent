@@ -126,7 +126,7 @@
 </div>  
 </div>
 <!--HIDEN EDIT FORM-->
-<div id="editForm" class="hidden">
+<div id="editForm" class="d-none">
   <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="AE TOKEN" id={{id}} name="amount">
                             <div class="input-group-append">
@@ -207,7 +207,7 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title">LOCATION: {{ location }}
-                        <a href="#" class="btn btn-sm btn-primary stretched link"><i id="edit_form_btn" class="fa fa-pencil"></i>Change Location</a></h5>
+                        <a href="#" class="btn btn-sm btn-primary stretched link" id="edit_form_btn"><i  class="fa fa-pencil"></i>Change Location</a></h5>
                         <h6 class="card-title">PRICE: {{ price }} AE</h6>
                         <p class="card-text">{{description}}</p>
 
