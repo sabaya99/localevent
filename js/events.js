@@ -149,12 +149,12 @@ payable contract LocalEventContract =
       
     /* this function update amount for specific user transaction by id
     */                                                                                                                                                                                        
-    function update_amount_by_id(id : int, amount : int, transactions : list(users_transaction)) =                                                                                                
-     let (my_ts, rest) = List.partition((t) => t.txt_id == id, transactions)                                                                                                            
-     switch(my_ts)                                                                                                                                                                              
-      [] => abort("no such id!")                                                                                                                                                               
-      [my_t] => my_t{amount = amount}::rest                                                                                                                                                    
-      _ => abort("id not unique!")
+    // function update_amount_by_id(id : int, amount : int, transactions : list(users_transaction)) =                                                                                                
+    //  let (my_ts, rest) = List.partition((t) => t.txt_id == id, transactions)                                                                                                            
+    //  switch(my_ts)                                                                                                                                                                              
+    //   [] => abort("no such id!")                                                                                                                                                               
+    //   [my_t] => my_t{amount = amount}::rest                                                                                                                                                    
+    //   _ => abort("id not unique!")
     
     
     /* this function filter taransactions that are refunded back to user and return remaining transaction
@@ -165,7 +165,7 @@ payable contract LocalEventContract =
 
 
 `;
-var contractAddress= "ct_2tfUctQM5MEJHom4cPDxmAhaRuuyK5Kuq6nWkALKSa88ERSzMV";
+var contractAddress= "ct_Tcbb8n8NwdnhfjZ4GcEUiLREZQ9dQxHkcwkrASE4nic9qJXGH";
 
 var client =null;
 
