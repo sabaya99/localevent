@@ -248,7 +248,7 @@ function addNewEvent(){
     
     
     await contractCall('add_event',[name, location,cover,price,description], 0);
-         location.reload((true));
+         window.location.reload((true));
          renderLocalEvents();
          $('#loader').hide();
     });
