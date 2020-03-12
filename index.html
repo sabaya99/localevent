@@ -307,10 +307,12 @@
     <script src="events.js"></script>
 <script>
 
+ $(document).ready(function(){
     $('[data-toggle="popover"]').popover({
        html:true,
         sanitize:false
     });
+});
 
    function pop(id){
      console.log(id)
