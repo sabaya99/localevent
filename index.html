@@ -125,8 +125,16 @@
  
 </div>  
 </div>
+<!--HIDEN EDIT FORM-->
+<div id="editForm" class="hide">
+  <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="AE TOKEN" id={{id}} name="amount">
+                            <div class="input-group-append">
+                                <button type="button" class="input-group-text payBtn" id={{id}}>Change Location</button>
 
-
+                            </div>
+                        </div>
+</div>
 <!-- The Modal -->
 <div class="modal " id="modal-id">
   <div class="modal-dialog">
@@ -199,7 +207,7 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title">LOCATION: {{ location }}
-                        <a href="#" class="btn btn-sm btn-primary stretched link editBtn"><i id={{id}} class="fa fa-pencil"></i>Change Location</a></h5>
+                        <a href="#" class="btn btn-sm btn-primary stretched link"><i id="edit_form_btn" class="fa fa-pencil"></i>Change Location</a></h5>
                         <h6 class="card-title">PRICE: {{ price }} AE</h6>
                         <p class="card-text">{{description}}</p>
 
@@ -289,6 +297,30 @@
     <script src="js/mustache.min.js" ></script>
      <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
     <script src="events.js"></script>
+<script>
+$(function(){
+    $('#edit_form_btn').popover({
+       
+        placement: 'bottom',
+        title: 'Edit Location Form',
+        html:true,
+        content:  $('#editForm').html()
+    }).on('click', function(){
+      // had to put it within the on click action so it grabs the correct info on submit
+      $('.btn-primary').click(function(){
+       $('#result').after("form submitted by " + $('#email').val())
+        $.post('/echo/html/',  {
+            email: $('#email').val(),
+            name: $('#name').val(),
+            gender: $('#gender').val()
+        }, function(r){
+          $('#pops').popover('hide')
+          $('#result').html('resonse from server could be here' )
+        })
+      })
+  })
+})
 
+</script>
 </body>
 </html>
