@@ -117,10 +117,13 @@ payable contract LocalEventContract =
 
            Chain.spend(to, Call.value)
            let amount =local_event.paid - Call.value
-           let count =local_event.total_paid - 1
+        
            let update_local_event=state.local_events{[event_id].paid = amount }
            put(state {local_events = update_local_event})
          
+           let count =local_event.total_paid - 1
+           let update_local_event_count=state.local_events{[event_id].total_paid = count }
+           put(state {local_events = update_local_event_count})
           
            let remain_transactions= delete_transaction_by_id(txt_id, history)
            let update_history = state.local_events{[local_event.index].history = remain_transactions}
@@ -163,7 +166,7 @@ payable contract LocalEventContract =
         rest_tranasction
 
 `;
-var contractAddress= "ct_MeU3r6RHaMccgDBUuMiTmsDdc7rrbeM3Jrr4rMNBqzH6snJrc";
+var contractAddress= "ct_2kY9TaVWG5JMR5CuZAi8DEnRfa1nSwRfENkgjr1gzsc9x52kEP";
 
 var client =null;
 
@@ -292,7 +295,7 @@ function addNewEvent(){
       });
   }
 
-function changeLocation(){
+  function changeLocation(){
     $(document).on('click','#changeLocationBtn', async function(){
         $('#loader').show();
    
