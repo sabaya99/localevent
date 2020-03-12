@@ -127,35 +127,6 @@
 </div>
 
 
-
-    <div class="accordion" id="transactions">
-        <div class="card">
-            <div class="card-header bg-success white" id="headingOne">
-                <h2 class="mb-0">
-                    <button type="button" class="btn btn-link white" data-toggle="collapse" data-target="#collapseOne">USER TRANSACTIONS</button>									
-                </h2>
-            </div>
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#transactions">
-                <div class="card-body">
-                <div class="list-group"> 
-
-                <div  class="list-group-item list-group-item-action">
-                <i class="fa fa-user"></i> 
-                {{ nick_name  }}
-                <span class="justify-content-center">Ammont paid : {{amount}}</span>
-                <button type="button" id= class="btn btn-info pull-right">Refund</button>
-                <input type="number" class=" form-control col-2 pull-right"/> 
-                
-              </div>
-
-             
-             </div>
-              </div>
-            </div>
-        </div>
-       </div>
-
-
 <!-- The Modal -->
 <div class="modal " id="modal-id">
   <div class="modal-dialog">
@@ -228,12 +199,12 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title">LOCATION: {{ location }}
-                        <a href="#" class="btn btn-sm btn-primary stretched link btnEdit"><i id="{{id}}" class="fa fa-pencil"></i>Change Location</a></h5>
+                        <a href="#" class="btn btn-sm btn-primary stretched link editBtn"><i id={{id}} class="fa fa-pencil"></i>Change Location</a></h5>
                         <h6 class="card-title">PRICE: {{ price }} AE</h6>
                         <p class="card-text">{{description}}</p>
 
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Pay Now" id="c{{id}}" name="amount">
+                            <input type="text" class="form-control" placeholder="AE TOKEN" id={{id}} name="amount">
                             <div class="input-group-append">
                                 <button type="button" class="input-group-text payBtn" id={{id}}>Pay Now</button>
 
@@ -243,13 +214,13 @@
                         <div class="row ">
                             <div class="col-sm-12 m-0 p-0">
 
-                                <div id="accordion" class="accordion">
+                                <div id="accordion{{id}}" class="accordion">
                                     <div class="card mb-0">
-                                        <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                                        <div class="card-header collapsed" data-toggle="collapse" href="#collapse{{id}}">
                                             <a class="card-title">LIST OF USERS PAYMENT</a>
                                         </div>
 
-                                        <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
+                                        <div id="collapse{{id}}" class="card-body collapse" data-parent="#accordion{{id}}">
 
                                             <div class="list-group list-group-flush">
                                             {{#history}}
@@ -260,9 +231,9 @@
                                                     <div class="row pull-right">
                                                         <div class="col-sm-12">
                                                             <div class="input-group mb-3">
-                                                                <input type="text" class="form-control col-6" placeholder="AE TOKEN" id="c{{id}}" name="comment">
+                                                                <input type="text" class="form-control col-6" placeholder="AE TOKEN" id="u{{id}}" name="comment">
                                                                 <div class="input-group-append">
-                                                                    <button type="button" class="input-group-text refundBtn" id={{id}}>Refund Now</button>
+                                                                    <button type="button" class="input-group-text refundBtn" id="u{{id}}">Refund Now</button>
 
                                                                 </div>
                                                             </div>
@@ -295,8 +266,8 @@
                     <div class="card-footer">
                         <h4><a href="#" title="Nature Portfolio">VOTE EVENT</a></h4>
                         <span class="pull-right">
-                        <i id="like1" class="fa fa-thumbs-up"></i> <div id="like1-bs3"></div>
-                        <i id="dislike1" class="fa fa-thumbs-down"></i> <div id="dislike1-bs3"></div>
+                        <i id={{id}} class="fa fa-thumbs-up upVoteBtn"></i> <div id="like1-bs3">{{up_vote}}</div>
+                        <i id={{id}} class="fa fa-thumbs-down downVoteBtn"></i> <div id="dislike1-bs3">{{down_vote}}</div>
                     </span>
                     </div>
                 </div>

@@ -259,55 +259,56 @@ function addNewEvent(){
         $('#loader').show();
         const evt_id = e.target.id;
         const amount = $('input[id='+evt_id+']').val();
+        console.log("id="+evt_id+" anount="+amount)
         await contractCall('pay_for_event',[evt_id], amount);
-        location.reload((true));
+        window.location.reload((true));
         renderLocalEvents();
         $('#loader').hide();
       });
   }
 
  async function upVotEvent(){
-    $('#events').on('click','.upVote', async function(e){
+    $('#events').on('click','.upVoteBtn', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
         await contractCall('up_vote',[evt_id], 0);
-        location.reload((true));
+        window.location.reload((true));
         renderLocalEvents();
         $('#loader').hide();
       });
 
   }
  async function downVoteEvent(){
-    $('#events').on('click','.downVote', async function(e){
+    $('#events').on('click','.downVoteBtn', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
         await contractCall('down_vote',[evt_id], 0);
-        location.reload((true));
+        window.location.reload((true));
         renderLocalEvents();
         $('#loader').hide();
       });
   }
 
  async function changeLocation(){
-    $('#events').on('click','.changeLocation', async function(e){
+    $('#events').on('click','.changeLocationBtn', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
         const new_location = $('input[id='+evt_id+']').val();
         await contractCall('change_event_location',[evt_id,new_location], 0);
-        location.reload((true));
+        window.location.reload((true));
         renderLocalEvents();
         $('#loader').hide();
       });
   }
 
   async function refund(){
-    $('#events').on('click','.refund', async function(e){
+    $('#events').on('click','.refundBtn', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
         const tx_id = 1
         const amount = $('input[id='+evt_id+']').val();
         await contractCall('refund',[evt_id,tx_id], amount);
-        location.reload((true));
+        window.location.reload((true));
         renderLocalEvents();
         $('#loader').hide();
       });
