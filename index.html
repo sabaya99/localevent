@@ -30,6 +30,68 @@
         height: 100%;
         z-index: 9999;
     }
+
+           .bs-example {
+            margin: 20px;
+        }
+        
+        .accordion .card-header:after {
+            font-family: 'FontAwesome';
+            content: "\f068";
+            float: right;
+        }
+        
+        .accordion .card-header.collapsed:after {
+            /* symbol for "collapsed" panels */
+            content: "\f067";
+        }
+        
+        .card .card-footer {
+            padding: 8px !important;
+            background-color: #f9f9f9 !important;
+            border-bottom-right-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+        
+        .card .card-footer h4 {
+            display: inline;
+            font: 400 normal 1.125em "Roboto", Arial, Verdana, sans-serif;
+            color: #34495e margin: 0 !important;
+            padding: 0 !important;
+        }
+        
+        .card .card-footer i.glyphicon {
+            display: inline;
+            font-size: 1.125em;
+            cursor: pointer;
+        }
+        
+        .card .card-footer i.glyphicon-thumbs-up {
+            color: #1abc9c;
+        }
+        
+        .card .card-footer i.glyphicon-thumbs-down {
+            color: #e74c3c;
+            padding-left: 5px;
+        }
+        
+        .card .card-footer div {
+            width: 15px;
+            display: inline;
+            font: 300 normal 1.125em "Roboto", Arial, Verdana, sans-serif;
+            color: #34495e;
+            text-align: center;
+            background-color: transparent !important;
+            border: none !important;
+        }
+        
+        .modal-title {
+            font: 400 normal 1.625em "Roboto", Arial, Verdana, sans-serif;
+        }
+        
+        .modal-footer {
+            font: 400 normal 1.125em "Roboto", Arial, Verdana, sans-serif;
+        }
     </style>
     </head>
   <body>
@@ -63,6 +125,8 @@
  
 </div>  
 </div>
+
+
 
     <div class="accordion" id="transactions">
         <div class="card">
@@ -155,42 +219,78 @@
 
       <script id="template" type="x-tmpl-mustache">
       {{#eventsArray}}
+    <div class="bs-example">
         <div class="card" style="max-width: 500px;">
-        <div class="row no-gutters">
-            <div class="col-md-5" style="background: #868e96;">
-          
-                <img src="{{cover}}" class="card-img-top h-100" alt="...">
-            </div>
-            <div class="col-md-7">
-                <div class="card-body">
-                    <h5 class="card-title">Location : {{location}}  </h5>
-                      <button><i id={{id}} style="color: red;" class="fa fa-pencil changeLocation"></i>Change</button>
-                    <p class="card-text">Price: {{price}}</p>
-                    <p class="card-text">{{description}}</p>
-                     <p class="card-text">
-                     <span class="card-text">Total participants : {{total_paid}}</span>
-                      <span class="card-text">Total Paid : {{paid}} AE</span>
-                  </p>
-                    <p class="card-text pull-right">
-                    <span class="pull-right">
-                    <div class="row pull-right">
-                    <div class="col-12">
-                        <button><i id={{id}} style="color: blue;" class="btn btn-info fa fa-thumbs-up upVote">{{up_vote}}</i></button>
-                        <button><i id={{id}} style="color: red;" class="fa fa-thumbs-down downVote">{{down_vote}}</i></button>
-                   </div>
-                    </div>
-                    </span>         
-                 </p>
+            <div class="row no-gutters">
+                <div class="col-md-5" style="background: #868e96;">
+                    <img src="{{cover}}" class="card-img-top h-100" alt="...">
                 </div>
-            <div class="card-footer">
-            <div class="input-group mb-3">
-               <input type="number" class="form-control" placeholder="Tokens e.g 100" id={{id}} name="amount">
-            <div class="input-group-append">
-               <button type="button" class="input-group-text btn btn-info payBtn" id={{id}}>Pay Now</button>
-             </div>
-           </div>
-          </div>
-    
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title">LOCATION: {{ location }}
+                        <a href="#" class="btn btn-sm btn-primary stretched link btnEdit"><i id="{{id}}" class="fa fa-pencil"></i>Change Location</a></h5>
+                        <h6 class="card-title">PRICE: {{ price }} AE</h6>
+                        <p class="card-text">{{description}}</p>
+
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Pay Now" id="c{{id}}" name="amount">
+                            <div class="input-group-append">
+                                <button type="button" class="input-group-text payBtn" id={{id}}>Pay Now</button>
+
+                            </div>
+                        </div>
+                      <!--STRAT OF USER PAYMENT CARD-->
+                        <div class="row ">
+                            <div class="col-sm-12 m-0 p-0">
+
+                                <div id="accordion" class="accordion">
+                                    <div class="card mb-0">
+                                        <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                                            <a class="card-title">LIST OF USERS PAYMENT</a>
+                                        </div>
+
+                                        <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
+
+                                            <div class="list-group list-group-flush">
+
+                                                <div class="list-group-item ">
+                                                    <i class="fa fa-user"></i> {{ nick_name }}
+                                                    <span class="justify-content-center">Ammont paid : {{amount}}</span>
+                                                    <div class="row pull-right">
+                                                        <div class="col-sm-12">
+                                                            <div class="input-group mb-3">
+                                                                <input type="text" class="form-control col-6" placeholder="AE TOKEN" id="c{{id}}" name="comment">
+                                                                <div class="input-group-append">
+                                                                    <button type="button" class="input-group-text refundBtn" id={{id}}>Refund Now</button>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--END OF USER PAYMENTS-->
+
+                    </div>
+                    <div class="card-footer">
+
+                    </div>
+                    <div class="card-footer">
+                        <h4><a href="#" title="Nature Portfolio">VOTE EVENT</a></h4>
+                        <span class="pull-right">
+                        <i id="like1" class="fa fa-thumbs-up"></i> <div id="like1-bs3"></div>
+                        <i id="dislike1" class="fa fa-thumbs-down"></i> <div id="dislike1-bs3"></div>
+                    </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
