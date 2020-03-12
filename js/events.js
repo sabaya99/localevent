@@ -231,12 +231,12 @@ $('#loader').hide();
     addNewEvent()
     payForEvent()
     upVotEvent()
-    down_vote()
+    downVoteEvent()
     changeLocation()
     refund()
 
 
-  function addNewEvent(){
+  async function addNewEvent(){
     $(document).on('click','#saveBtn', async function(){
         $('#loader').show();
         const name = $('#name').val();
@@ -256,7 +256,7 @@ $('#loader').hide();
     });
   }
 
-  function payForEvent(){
+ async function payForEvent(){
     $('#events').on('click','.payBtn', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
@@ -268,7 +268,7 @@ $('#loader').hide();
       });
   }
 
-  function upVotEvent(){
+ async function upVotEvent(){
     $('#events').on('click','.upVote', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
@@ -279,7 +279,7 @@ $('#loader').hide();
       });
 
   }
-  function downVoteEvent(){
+ async function downVoteEvent(){
     $('#events').on('click','.downVote', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
@@ -290,7 +290,7 @@ $('#loader').hide();
       });
   }
 
-  function changeLocation(){
+ async function changeLocation(){
     $('#events').on('click','.changeLocation', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
@@ -302,7 +302,7 @@ $('#loader').hide();
       });
   }
 
-  function refund(){
+  async function refund(){
     $('#events').on('click','.refund', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
