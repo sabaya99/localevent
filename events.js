@@ -227,10 +227,14 @@ $('#loader').hide();
 
 });
 
-  
+ addNewEvent() 
+ payForEvent()
+ refund()
+ changeLocation()
+ upVotEvent()
+ downVoteEvent()
 
-
-  async function addNewEvent(){
+function addNewEvent(){
     $(document).on('click','#saveBtn', async function(){
         $('#loader').show();
         const name = $('#name').val();
@@ -250,7 +254,7 @@ $('#loader').hide();
     });
   }
 
- async function payForEvent(){
+  function payForEvent(){
     $('#events').on('click','.payBtn', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
