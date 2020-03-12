@@ -1,5 +1,4 @@
-var contractSource = `
-include "List.aes"
+var contractSource = `include "List.aes"
 payable contract LocalEventContract =
 
     record local_event = {
@@ -163,9 +162,8 @@ payable contract LocalEventContract =
         let rest_tranasction = List.filter((t) => t.txt_id != id,transactions)
         rest_tranasction
 
-
 `;
-var contractAddress= "ct_Tcbb8n8NwdnhfjZ4GcEUiLREZQ9dQxHkcwkrASE4nic9qJXGH";
+var contractAddress= "ct_MeU3r6RHaMccgDBUuMiTmsDdc7rrbeM3Jrr4rMNBqzH6snJrc";
 
 var client =null;
 
@@ -226,14 +224,10 @@ window.addEventListener('load',async () =>{
     }
  renderLocalEvents();
 $('#loader').hide();
+
 });
 
-    addNewEvent()
-    payForEvent()
-    upVotEvent()
-    downVoteEvent()
-    changeLocation()
-    refund()
+  
 
 
   async function addNewEvent(){
