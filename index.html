@@ -125,20 +125,7 @@
  
 </div>  
 </div>
-<!--HIDEN EDIT FORM-->
-<div id="editForm" style="visibility: hidden">
-<div class="row">
-<div class="col-sm-12">
-  <div class="input-group mb-3">
-                            <input type="text" class="form-control" value={{location}} placeholder="Name" id={{id}} name="amount">
-                            <div class="input-group-append">
-                                <button type="button" class="input-group-text changeLocationBtn" id={{id}}>Change Location</button>
 
-                            </div>
-                        </div>
-                        </div>
-                        </div>
-</div>
 <!-- The Modal -->
 <div class="modal " id="modal-id">
   <div class="modal-dialog">
@@ -258,7 +245,7 @@
                                     data-event_id={{id}} data-toggle="modal" 
                                     data-event_name={{location}}
                                     data-target="#modal-edit">
-                                    <i  class="fa fa-pencil"></i>Change location 2</button>
+                                    <i  class="fa fa-pencil"></i>Change location</button>
                  
                         <h6 class="card-title">PRICE: {{ price }} AE</h6>
                         <p class="card-text">{{description}}</p>
@@ -356,17 +343,6 @@ $('#modal-edit').on('show.bs.modal', function (event) {
     $(this).find('.modal-body #event_id').val(evtId)
 })
 
-   function pop(id){
-     console.log(id)
-      $('#'+id).popover({
-       
-        placement: 'bottom',
-        title: 'Popover Form',
-        html:true,
-        sanitize: false,
-        content: $('#editForm').html()
-    })
-   }
 
 </script>
 </body>
