@@ -169,6 +169,7 @@ var client =null;
 
 var eventsArray = [];
 var eventsLength =0;
+var userLength=0;
 
 async function renderLocalEvents() {
     var template=$('#template').html();
@@ -204,6 +205,7 @@ window.addEventListener('load',async () =>{
     console.log(eventsLength);
     for (let i = 1; i <= eventsLength; i++) {
        const evt = await callStatic('get_local_event',[i]);
+       userLength =await callStatic('get_history_length',[evt.index]);
          console.log(evt);
        eventsArray.push({
             id       : evt.index,
@@ -217,7 +219,8 @@ window.addEventListener('load',async () =>{
             up_vote   : evt.up_vote,
             down_vote  : evt.down_vote,
             total_paid     : evt.total_paid,
-            history : evt.history
+            history : evt.history,
+            tota_user: userLength
         })
 
         
