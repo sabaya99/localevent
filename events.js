@@ -308,9 +308,9 @@ function addNewEvent(){
     $('#events').on('click','.refundBtn', async function(e){
         $('#loader').show();
         const evt_id = e.target.id;
-        const tx_id = 1
+        const tx_id = $('input[id='+'p2'+evt_id+']').val();
         const amount = $('input[id='+'p'+evt_id+']').val();
-        console.log("id="+evt_id+" anount="+amount)
+        console.log("id="+evt_id+ "txt_id="+tx_id +"anount="+amount)
         await contractCall('refund',[evt_id,tx_id], amount);
         window.location.reload((true));
         renderLocalEvents();
