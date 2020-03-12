@@ -307,11 +307,12 @@ function addNewEvent(){
   async function refund(){
     $('#events').on('click','.refundBtn', async function(e){
         $('#loader').show();
-        const evt_id = e.target.id;
-        const tx_id = $('input[id='+'p2'+evt_id+']').val();
-        const amount = $('input[id='+'p'+evt_id+']').val();
-        console.log("id="+evt_id+ "txt_id="+tx_id +"anount="+amount)
-        await contractCall('refund',[evt_id,tx_id], amount);
+        const tx_id = e.target.id;
+        const evt_id = $('input[id='+'evt'+tx_id+']').val();
+        const amount = $('input[id='+'p'+tx_id+']').val();
+        const address= $('input[id='+'address'+tx_id+']').val();
+        console.log("event id="+evt_id+ "txt_id="+tx_id +"anount="+amount)
+        await contractCall('refund',[evt_id,tx_id,address], amount);
         window.location.reload((true));
         renderLocalEvents();
         $('#loader').hide();
