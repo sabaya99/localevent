@@ -186,7 +186,7 @@ async function callStatic(func,args){
     const calledGet =await contract.call(func,args,{callStatic : true}).catch(e =>console.error(e))
 
     const decodedGet = await calledGet.decode().catch(e =>console.error(e));
-    
+    console.log(decodedGet)
     return decodedGet;
 }
 
@@ -194,7 +194,7 @@ async function contractCall(func, args,value) {
     const contract = await client.getContractInstance(contractSource, {contractAddress});
    
     const calledGet =await contract.call(func,args,{amount : value}).catch(e =>console.error(e))
-
+    console.log(calledGet)
     return calledGet;
   }
 
@@ -227,14 +227,13 @@ window.addEventListener('load',async () =>{
  renderLocalEvents();
 $('#loader').hide();
 });
-document.ready(function(){
+
     addNewEvent()
     payForEvent()
     upVotEvent()
     down_vote()
     changeLocation()
     refund()
-})
 
 
   function addNewEvent(){
