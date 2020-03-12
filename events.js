@@ -293,7 +293,7 @@ function addNewEvent(){
   }
 
  async function changeLocation(){
-    $('#events').on('click','.changeLocationBtn', async function(e){
+    $(document).on('click','.changeLocationBtn', async function(e){
         $('#loader').show();
    
         const evt_id = $('#event_id').val();
