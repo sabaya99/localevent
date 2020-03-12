@@ -19,7 +19,7 @@
             background-size: cover;
     }
    
-    .c-white{
+    .white{
        color:#fff;  
     }
     #loader{
@@ -64,6 +64,32 @@
 </div>  
 </div>
 
+    <div class="accordion" id="transactions">
+        <div class="card">
+            <div class="card-header bg-success white" id="headingOne">
+                <h2 class="mb-0">
+                    <button type="button" class="btn btn-link white" data-toggle="collapse" data-target="#collapseOne">USER TRANSACTIONS</button>									
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#transactions">
+                <div class="card-body">
+                <div class="list-group"> 
+                
+                <div  class="list-group-item list-group-item-action">
+                <i class="fa fa-user"></i> 
+                {{ nick_name  }}
+                <span class="justify-content-center">Ammont paid : {{amount}}</span>
+                <button type="button" id= class="btn btn-info pull-right">Refund</button>
+                <input type="number" class=" form-control col-2 pull-right"/> 
+                
+              </div>
+
+             
+             </div>
+              </div>
+            </div>
+        </div>
+       </div>
 
 
 <!-- The Modal -->
@@ -145,14 +171,14 @@
                      <span class="card-text">Total participants : {{total_paid}}</span>
                       <span class="card-text">Total Paid : {{paid}} AE</span>
                   </p>
-                    <p class="card-text float-right">
-                    <span class="float-right">
-                    <div class="row">
-                      <div class="col-12 pull-right">
+                    <p class="card-text pull-right">
+                    <span class="pull-right">
+                    <div class="row pull-right">
+                    <div class="col-12">
                         <button><i id={{id}} style="color: blue;" class="btn btn-info fa fa-thumbs-up upVote">{{up_vote}}</i></button>
                         <button><i id={{id}} style="color: red;" class="fa fa-thumbs-down downVote">{{down_vote}}</i></button>
                    </div>
-                      </div>
+                    </div>
                     </span>         
                  </p>
                 </div>
