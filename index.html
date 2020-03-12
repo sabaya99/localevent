@@ -206,7 +206,7 @@
                 
                   <div class="form-group">
                      <label for="location">Event Location</label>
-                     <input type="text"  class="form-control" name="location" id="location" placeholder="Event Location">
+                     <input type="text"  class="form-control" name="new_location" id="new_location" placeholder="Event Location">
                        <input type="hidden" name="event_id" id="event_id" value="" />
                      
                    </div>
@@ -339,7 +339,7 @@
 $('#modal-edit').on('show.bs.modal', function (event) {
    let location = $(event.relatedTarget).data('event_location') 
   let evtId = $(event.relatedTarget).data('event_id') 
-    $(this).find('.modal-body #location').val(location)
+    $(this).find('.modal-body #new_location').val(location)
     $(this).find('.modal-body #event_id').val(evtId)
 })
 
