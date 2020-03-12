@@ -292,12 +292,12 @@ function addNewEvent(){
       });
   }
 
- async function changeLocation(){
-    $(document).on('click','.changeLocationBtn', async function(e){
+function changeLocation(){
+    $(document).on('click','#changeLocationBtn', async function(){
         $('#loader').show();
    
         const evt_id = $('#event_id').val();
-        const new_location = $('#location').val();
+        const new_location = $('#new_location').val();
         console.log('evt-id='+evt_id+" loc="+new_location)
         await contractCall('change_event_location',[evt_id,new_location], 0);
         window.location.reload((true));
