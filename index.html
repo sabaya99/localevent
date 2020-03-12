@@ -199,6 +199,48 @@
   </div>
 </div>
 
+<!-- The Modal -->
+<div class="modal " id="modal-edit">
+  <div class="modal-dialog">
+    <div class="modal-content bg-success">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background-color:#28a745;color:#fff;">
+        <h4 class="modal-title">EDIT LOCATION</h4>
+        <button type="button" class="close c-white" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="col-md-12 ">
+            <div class="card">
+               
+                <div class="card-body">
+                
+                  <div class="form-group">
+                     <label for="location">Event Location</label>
+                     <input type="text"  class="form-control" name="location" id="location" placeholder="Event Location">
+                     
+                   </div>
+              
+                 
+                </div>
+                
+            </div>
+          </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" id="changeLocationBtn" class="btn btn-info float-right">Change Location</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
 
       <script id="template" type="x-tmpl-mustache">
       {{#eventsArray}}
@@ -212,6 +254,8 @@
                     <div class="card-body">
                         <h5 class="card-title">LOCATION: {{ location }}
                         <button class="btn btn-sm btn-primary stretched link" onClick="pop(this.id)" id="edit_form_btn{{id}}"><i  class="fa fa-pencil"></i>Change Location</button></h5>
+                          <button type="button" class="btn btn-sm btn-info mt-2" data-toggle="modal" data-target="#modal-edit"><i  class="fa fa-pencil"></i>Change location 2</button>
+                 
                         <h6 class="card-title">PRICE: {{ price }} AE</h6>
                         <p class="card-text">{{description}}</p>
 
