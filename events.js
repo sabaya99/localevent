@@ -166,7 +166,7 @@ payable contract LocalEventContract =
         rest_tranasction
 
 `;
-var contractAddress= "ct_2kY9TaVWG5JMR5CuZAi8DEnRfa1nSwRfENkgjr1gzsc9x52kEP";
+var contractAddress= "ct_f4K8KUGn969ETmETJVtzNpmXdjTxaRNfw6jWs3v19TtYLp2h7";
 
 var client =null;
 
