@@ -295,8 +295,10 @@ function addNewEvent(){
  async function changeLocation(){
     $('#events').on('click','.changeLocationBtn', async function(e){
         $('#loader').show();
-        const evt_id = e.target.id;
-        const new_location = $('input[id='+evt_id+']').val();
+   
+        const evt_id = $('#event_id').val();
+        const new_location = $('#location').val();
+        console.log('evt-id='+evt_id+" loc="+new_location)
         await contractCall('change_event_location',[evt_id,new_location], 0);
         window.location.reload((true));
         renderLocalEvents();

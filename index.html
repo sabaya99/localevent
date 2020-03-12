@@ -200,7 +200,7 @@
 </div>
 
 <!-- The Modal -->
-<div class="modal " id="modal-edit">
+<div class="modal fade" id="modal-edit">
   <div class="modal-dialog">
     <div class="modal-content bg-success">
 
@@ -220,6 +220,7 @@
                   <div class="form-group">
                      <label for="location">Event Location</label>
                      <input type="text"  class="form-control" name="location" id="location" placeholder="Event Location">
+                       <input type="hidden" name="event_id" id="event_id" value="" />
                      
                    </div>
               
@@ -253,8 +254,11 @@
                 <div class="col-md-7">
                     <div class="card-body">
                         <h5 class="card-title">LOCATION: {{ location }}
-                        <button class="btn btn-sm btn-primary stretched link" onClick="pop(this.id)" id="edit_form_btn{{id}}"><i  class="fa fa-pencil"></i>Change Location</button></h5>
-                          <button type="button" class="btn btn-sm btn-info mt-2" data-toggle="modal" data-target="#modal-edit"><i  class="fa fa-pencil"></i>Change location 2</button>
+                        <button type="button" class="btn btn-sm btn-info mt-2"
+                                    data-event_id={{id}} data-toggle="modal" 
+                                    data-event_name={{location}}
+                                    data-target="#modal-edit">
+                                    <i  class="fa fa-pencil"></i>Change location 2</button>
                  
                         <h6 class="card-title">PRICE: {{ price }} AE</h6>
                         <p class="card-text">{{description}}</p>
@@ -344,6 +348,14 @@
      <script src="https://unpkg.com/@aeternity/aepp-sdk@6.1.2/dist/aepp-sdk.browser-script.js"></script>
     <script src="events.js"></script>
 <script>
+
+$('#modal-edit').on('show.bs.modal', function (event) {
+   let location = $(event.relatedTarget).data('location') 
+  let evtId = $(event.relatedTarget).data('event_id') 
+    $(this).find('.modal-body #location').val(evtId)
+    $(this).find('.modal-body #event_id').val(evtId)
+})
+
    function pop(id){
      console.log(id)
       $('#'+id).popover({
